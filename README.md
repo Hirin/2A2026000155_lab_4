@@ -1,5 +1,7 @@
 # TravelBuddy — Trợ lý Du lịch Thông minh (Nâng cấp Lab 4)
 
+Tên: Nguyễn Duy Minh Hoàng - MSHV: 2A2026000155
+
 Ứng dụng trợ lý du lịch được xây dựng bằng **LangGraph** và **LangChain**, tích hợp các công cụ thu thập dữ liệu giá vé máy bay, khách sạn, thời tiết và chất lượng không khí thực tế.
 
 ## 🧪 Kiểm thử (Testing)
