@@ -93,6 +93,15 @@ def get_coordinates(location: str) -> Optional[Dict[str, Any]]:
     return None
 
 @tool
+def get_current_date() -> str:
+    """
+    Lấy ngày và thời gian hiện tại của hệ thống. 
+    Hãy gọi công cụ này đầu tiên nếu người dùng nhắc đến các mốc thời gian tương đối như 'ngày mai', 'tuần sau', 'tháng tới'.
+    """
+    now = datetime.now()
+    return now.strftime("%d/%m/%Y %H:%M:%S")
+
+@tool
 def get_airport_code(location: str) -> str:
     """
     Tìm mã sân bay IATA 3 chữ cái cho một địa danh/thành phố. 
@@ -150,7 +159,7 @@ def get_airport_code(location: str) -> str:
     return f"Không thể xác định mã IATA cho '{location}'. Vui lòng thử tên thành phố lớn phổ biến."
 
 @tool
-def search_flights(origin: str, destination: str) -> str:
+def search_flights(origin: str, destination: str, flight_date: str = None) -> str:
     """
     Tìm kiếm các chuyến bay thực tế giữa hai địa điểm bằng mã sân bay IATA.
     Bạn PHẢI cung cấp mã IATA 3 chữ cái (VD: 'HAN', 'SGN', 'DAD'). 
@@ -158,6 +167,7 @@ def search_flights(origin: str, destination: str) -> str:
     Tham số:
     - origin: mã IATA điểm đi (3 chữ cái, VD: 'HAN')
     - destination: mã IATA điểm đến (3 chữ cái, VD: 'SGN')
+    - flight_date: ngày đi định dạng 'YYYY-MM-DD' (VD: '2026-04-08'). Nếu người dùng nói 'ngày mai', hãy tính toán dựa trên get_current_date.
     """
     origin_iata = origin.upper().strip()
     dest_iata = destination.upper().strip()
@@ -168,7 +178,7 @@ def search_flights(origin: str, destination: str) -> str:
     if origin_iata == dest_iata:
         return f"Lỗi: Điểm đi và điểm đến giống nhau ({origin_iata})."
 
-    target_date = (datetime.now() + timedelta(days=7)).strftime("%Y-%m-%d")
+    target_date = flight_date if flight_date else (datetime.now() + timedelta(days=7)).strftime("%Y-%m-%d")
 
     try:
         flight_data = [FData(date=target_date, from_airport=origin_iata, to_airport=dest_iata)]

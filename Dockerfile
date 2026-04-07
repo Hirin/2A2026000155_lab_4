@@ -29,7 +29,8 @@ RUN /app/.venv/bin/python -m playwright install chromium --with-deps
 # Đảm bảo dùng Python từ venv
 ENV PATH="/app/.venv/bin:$PATH"
 
-# Không commit .env vào image - truyền qua docker-compose
-# File .env sẽ được mount runtime
+# Mở cổng cho Streamlit
+EXPOSE 8501
 
-CMD ["python", "main.py"]
+# Chạy ứng dụng Web
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]

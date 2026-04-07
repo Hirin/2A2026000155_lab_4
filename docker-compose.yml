@@ -4,7 +4,9 @@ services:
       context: .
       dockerfile: Dockerfile
     image: travelbuddy:latest
-    container_name: travelbuddy_app
+    container_name: travelbuddy_web
+    ports:
+      - "8501:8501"
 
     # Nạp biến môi trường từ file .env trên máy host
     # File .env KHÔNG được đưa vào image, chỉ truyền lúc chạy

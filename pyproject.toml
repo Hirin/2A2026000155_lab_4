@@ -16,6 +16,7 @@ dependencies = [
     "requests",
     "nest-asyncio",
     "langsmith",
+    "streamlit",
 ]
 
 [project.optional-dependencies]
