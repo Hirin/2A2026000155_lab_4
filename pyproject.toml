@@ -1,0 +1,25 @@
+[project]
+name = "travelbuddy"
+version = "0.1.0"
+description = "A travel agent built with LangGraph"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "langchain-core",
+    "langchain-openai",
+    "langchain-google-genai",
+    "langgraph",
+    "fast-flights",
+    "playwright",
+    "beautifulsoup4",
+    "python-dotenv",
+    "requests",
+    "nest-asyncio",
+    "langsmith",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio"
+]
